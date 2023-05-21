@@ -22,6 +22,7 @@ class AddProductPage extends StatelessWidget {
               autocorrect: false,
               controller: codeC,
               keyboardType: TextInputType.number,
+              maxLength: 10,
               decoration: InputDecoration(
                 labelText: "Product Code",
                 enabledBorder: OutlineInputBorder(
