@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qrcode/bloc/product/product_bloc.dart';
 import 'package:qrcode/models/product.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qrcode/routes/router.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
@@ -13,7 +14,7 @@ class ProductsPage extends StatelessWidget {
     ProductBloc productBloc = context.read<ProductBloc>();
     return Scaffold(
         appBar: AppBar(
-          title: Text("Products Page"),
+          title: Text("All Products"),
         ),
         body: StreamBuilder<QuerySnapshot<Product>>(
           stream: productBloc.streamProducts(),
@@ -57,7 +58,13 @@ class ProductsPage extends StatelessWidget {
                   elevation: 5,
                   margin: EdgeInsets.only(bottom: 20),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      context.goNamed(Routes.PRODUCT_DETAIL,
+                          params: {
+                            "id": product.productId!,
+                          },
+                          extra: product);
+                    },
                     borderRadius: BorderRadius.circular(9),
                     child: Container(
                       padding: EdgeInsets.all(20),

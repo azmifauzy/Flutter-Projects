@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:qrcode/bloc/bloc.dart';
 import 'package:qrcode/config/colors.dart';
 import 'package:qrcode/routes/router.dart';
@@ -55,12 +56,24 @@ class HomePage extends StatelessWidget {
               case 2:
                 title = "Scan QR";
                 icon = Icons.qr_code;
-                onTap = () {};
+                onTap = () async {
+                  String barcode = await FlutterBarcodeScanner.scanBarcode(
+                      "#000000", "Cancel", true, ScanMode.QR);
+
+                  context
+                      .read<ProductBloc>()
+                      .add(ProductEventScanProduct(barcode));
+
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(barcode)));
+                };
                 break;
               case 3:
                 title = "Catalog";
                 icon = Icons.document_scanner_outlined;
-                onTap = () {};
+                onTap = () {
+                  context.read<ProductBloc>().add(ProductEventExportToPdf());
+                };
                 break;
               default:
             }
@@ -73,13 +86,31 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                        height: 40,
-                        width: 40,
-                        child: Icon(
-                          icon,
-                          size: 40,
-                        )),
+                    (index == 3)
+                        ? BlocConsumer<ProductBloc, ProductState>(
+                            listener: (context, state) {
+                              // TODO: implement listener
+                            },
+                            builder: (context, state) {
+                              if (state is ProductStateProductLoadingExport) {
+                                return CircularProgressIndicator();
+                              }
+                              return SizedBox(
+                                  height: 40,
+                                  width: 40,
+                                  child: Icon(
+                                    icon,
+                                    size: 40,
+                                  ));
+                            },
+                          )
+                        : SizedBox(
+                            height: 40,
+                            width: 40,
+                            child: Icon(
+                              icon,
+                              size: 40,
+                            )),
                     SizedBox(
                       height: 10,
                     ),

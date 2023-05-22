@@ -85,9 +85,13 @@ class LoginPage extends StatelessWidget {
               },
               builder: (context, state) {
                 if (state is AuthStateLoading) {
-                  return Text("Loading...");
+                  return Text("Loading...",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500));
                 }
-                return Text("Login");
+                return Text("Login",
+                    style:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500));
               },
             ))
       ],

@@ -21,7 +21,7 @@ class AddProductPage extends StatelessWidget {
             TextField(
               autocorrect: false,
               controller: codeC,
-              keyboardType: TextInputType.number,
+              keyboardType: TextInputType.text,
               maxLength: 10,
               decoration: InputDecoration(
                 labelText: "Product Code",
@@ -82,11 +82,11 @@ class AddProductPage extends StatelessWidget {
                       ScaffoldMessenger.of(context)
                           .showSnackBar(SnackBar(content: Text(state.msg)));
                     }
-                    if (state is ProductStateProductComplete) {
+                    if (state is ProductStateProductCompleteAdd) {
                       codeC.clear();
                       namaC.clear();
                       qtyC.clear();
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         backgroundColor: AppColors.primaryColor,
                         content: Text("Berhasil Menambah Produk"),
                         duration: Duration(seconds: 2),

@@ -15,13 +15,13 @@ class Product {
         code: json["code"] ?? "",
         name: json["name"] ?? "",
         qty: json["qty"] ?? 0,
-        productId: json["product_id"] ?? "",
+        productId: json["productId"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
         "code": code,
         "name": name,
         "qty": qty,
-        "product_id": productId,
+        "productId": productId,
       };
 }

@@ -10,6 +10,26 @@ class ProductEventAddProduct extends ProductEvent {
   final int qty;
 }
 
-class ProductEventEditProduct extends ProductEvent {}
+class ProductEventEditProduct extends ProductEvent {
+  ProductEventEditProduct(
+      {required this.productId,
+      required this.code,
+      required this.name,
+      required this.qty});
+  final String productId;
+  final String code;
+  final String name;
+  final int qty;
+}
 
-class ProductEventDeleteProduct extends ProductEvent {}
+class ProductEventDeleteProduct extends ProductEvent {
+  ProductEventDeleteProduct(this.id);
+  final String id;
+}
+
+class ProductEventExportToPdf extends ProductEvent {}
+
+class ProductEventScanProduct extends ProductEvent {
+  ProductEventScanProduct(this.code);
+  final String code;
+}
